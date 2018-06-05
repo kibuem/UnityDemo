@@ -46,7 +46,7 @@ namespace Assets.Tests
         {
             Scorer scorer = new BasicScorer();
             Player p1 = new Player("A");
-            p1.AddCard(new Card(8, true));
+            p1.AddCard(new Card(9, false));
             p1.AddCard(new Card(5, false)); //4점
 
             Player p2 = new Player("B");
