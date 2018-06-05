@@ -7,23 +7,17 @@ namespace Assets.Tests
 {
     class BasicScorerTest_문슬기범
     {
-        [SetUp]
-        public void Init()
-        {
-            //            Deck.Instance.PrepareNewRound();
-        }
-
         [Test]
         public void 광땡으로_이기는_경우()
         {
-            Scorer scorer = new SimpleScorer();
+            Scorer scorer = new BasicScorer();
             Player p1 = new Player("A");
-            p1.AddCard(new Card(4, false));
-            p1.AddCard(new Card(4, false)); //40점
+            p1.AddCard(new Card(1, false));
+            p1.AddCard(new Card(8, false)); //9점
 
             Player p2 = new Player("B");
-            p2.AddCard(new Card(4, true)); //9점
-            p2.AddCard(new Card(5, true)); //101점
+            p2.AddCard(new Card(3, true)); //1점
+            p2.AddCard(new Card(8, true)); //101점
 
             Player winner = scorer.GetWinner(p1, p2);
 
@@ -33,31 +27,31 @@ namespace Assets.Tests
         [Test]
         public void 땡으로_이기는_경우()
         {
-            Scorer scorer = new SimpleScorer();
+            Scorer scorer = new BasicScorer();
             Player p1 = new Player("A");
-            p1.AddCard(new Card(4, false));
-            p1.AddCard(new Card(4, false));
+            p1.AddCard(new Card(5, false));
+            p1.AddCard(new Card(4, false)); //9점
 
             Player p2 = new Player("B");
-            p2.AddCard(new Card(4, true));
-            p2.AddCard(new Card(8, true));
+            p2.AddCard(new Card(3, false)); //6점
+            p2.AddCard(new Card(3, true)); //60점
 
             Player winner = scorer.GetWinner(p1, p2);
 
-            Assert.AreEqual(p1, winner);
+            Assert.AreEqual(p2, winner);
         }
 
         [Test]
         public void 끗으로_이기는_경우()
         {
-            Scorer scorer = new SimpleScorer();
+            Scorer scorer = new BasicScorer();
             Player p1 = new Player("A");
-            p1.AddCard(new Card(8, false));
-            p1.AddCard(new Card(9, false));
+            p1.AddCard(new Card(8, true));
+            p1.AddCard(new Card(5, false)); //4점
 
             Player p2 = new Player("B");
-            p2.AddCard(new Card(4, true));
-            p2.AddCard(new Card(2, true));
+            p2.AddCard(new Card(1, true));
+            p2.AddCard(new Card(2, false)); //3점
 
             Player winner = scorer.GetWinner(p1, p2);
 
